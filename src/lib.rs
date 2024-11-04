@@ -54,3 +54,28 @@ mod tests_b {
         assert_eq!(result, "ProgrammerS123".to_string());
     }
 }
+
+
+// https://school.programmers.co.kr/learn/courses/30/lessons/181942
+pub fn put_write_one_two(str1: &str, str2: &str) -> String {
+    let mut str1_chars_v: Vec<char> = str1.chars().collect();
+    let mut str2_chars_v: Vec<char> = str2.chars().collect();
+
+    str1_chars_v.append(&mut str2_chars_v);
+    // left: "aaaaabbbbb" 
+
+    let result: String = str1_chars_v.iter().collect();
+
+    result
+}
+
+#[cfg(test)]
+mod tests_c {
+    use super::*;
+
+    #[test]
+    fn it_works() {
+        let result = put_write_one_two("aaaaa", "bbbbb");
+        assert_eq!(result, "ababababab".to_string());
+    }
+}
