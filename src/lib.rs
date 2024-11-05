@@ -99,3 +99,47 @@ mod tests_c {
         assert_eq!(result, "ababababab".to_string());
     }
 }
+
+
+
+// ---- tests_d::it_works_d1 stdout ----
+// thread 'tests_d::it_works_d1' panicked at /usr/src/debug/rust/rustc-1.82.0-src/library/core/src/num/mod.rs:1136:5:
+// attempt to multiply with overflow
+// note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+// ---- tests_d::it_works_d2 stdout ----
+// thread 'tests_d::it_works_d2' panicked at /usr/src/debug/rust/rustc-1.82.0-src/library/core/src/num/mod.rs:1136:5:
+// attempt to multiply with overflow⏎  
+pub fn q4(num_v: Vec<u32>) -> i32 {
+    let sumed: u32= num_v.iter().sum();
+    let powed: u32= sumed.pow(sumed);
+    // let powed= i32::pow(sumed, sumed).unwrap();
+
+    let mut multi= 1_u32;
+    for num_e in num_v {
+        multi*= num_e;
+    }
+
+    if multi < powed {
+        return 1_i32;
+    }else{
+        return 0_i32;
+    }
+}
+
+#[cfg(test)]
+mod tests_d {
+    use super::*;
+
+    #[test]
+    fn it_works_d1() {
+        let result = q4(Vec::from([3_u32, 4, 5, 2, 1]));
+        assert_eq!(result, 1);
+    }
+
+    #[test]
+    fn it_works_d2() {
+        let result = q4(Vec::from([5_u32, 7, 8, 3]));
+        assert_eq!(result, 0);
+    }
+}
